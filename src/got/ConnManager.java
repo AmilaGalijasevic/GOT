@@ -7,7 +7,6 @@ import java.sql.SQLException;
 public class ConnManager {
 
 	private static ConnManager instance = null;
-
 	// DB credentials
 	private final String USERNAME = "root";
 	private final String PASSWORD = "root";
@@ -20,13 +19,11 @@ public class ConnManager {
 	private ConnManager() {
 
 	}
-
 	public static ConnManager getInstance() {
 		if (instance == null) {
 			instance = new ConnManager();
 		}
 		return instance;
-
 	}
 
 	private boolean openConnection() {
@@ -37,7 +34,6 @@ public class ConnManager {
 			System.err.println(e);
 			return false;
 		}
-
 	}
 
 	public Connection getConnection() {

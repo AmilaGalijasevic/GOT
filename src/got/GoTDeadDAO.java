@@ -41,13 +41,13 @@ public class GoTDeadDAO implements GoTDeadInterface {
 		java.util.Scanner input = new java.util.Scanner(System.in);
 		try (
 				// java.sql.Statement
-				PreparedStatement statement = connection.prepareStatement(query); ){
+				PreparedStatement statement = connection.prepareStatement(query);) {
 			ResultSet rs = null;
 			System.out.println("Enter name of the character: ");
-			
+
 			String name = input.nextLine();
 			System.out.println("Enter lastname of the character: ");
-			
+
 			String lastname = input.nextLine();
 
 			statement.setString(1, name);
@@ -59,8 +59,10 @@ public class GoTDeadDAO implements GoTDeadInterface {
 				dead = new GoTDead(rs.getInt("ID"), rs.getString("name"), rs.getString("lastname"),
 						rs.getString("role"), rs.getInt("tod"), rs.getString("execution"));
 
+				System.out.println("ID: " + rs.getInt("ID") + ";  Name: " + rs.getString("name") + ";  Lastname: "
+						+ rs.getString("lastname") + ";  Role: " + rs.getString("role") + ";  Dead in season: "
+						+ rs.getInt("tod") + ";  Dead by: " + rs.getString("execution"));
 				// close the ResultSet
-
 				rs.close();
 			} else {
 				System.out.println("No matching data in the database");
@@ -164,7 +166,7 @@ public class GoTDeadDAO implements GoTDeadInterface {
 
 				System.out.println("Character updated in the database.");
 			}
-		}else{
+		} else {
 			System.out.println("No such character in the database");
 		}
 	}
@@ -183,9 +185,10 @@ public class GoTDeadDAO implements GoTDeadInterface {
 	public ArrayList<GoTDead> getDeadCharacterBySeason() throws SQLException {
 		String query = "select name, lastname, execution from got.dead where tod = ?;";
 		ArrayList<GoTDead> deadBySeason = new ArrayList<>();
-		try (PreparedStatement statement = connection.prepareStatement(query);
-				java.util.Scanner input = new java.util.Scanner(System.in);
-				) {
+		java.util.Scanner input = new java.util.Scanner(System.in);
+
+		try (PreparedStatement statement = connection.prepareStatement(query);) {
+
 			System.out.println("Enter a number of the season: ");
 			int number = input.nextInt();
 			// create a new ResultSet
@@ -193,10 +196,11 @@ public class GoTDeadDAO implements GoTDeadInterface {
 			statement.setInt(1, number);
 			rs = statement.executeQuery();
 			System.out.println("List of dead charachters in season " + number + ": ");
+
 			while (rs.next()) {
 				deadBySeason
 						.add(new GoTDead(rs.getString("name"), rs.getString("lastname"), rs.getString("execution")));
-				
+
 				System.out.println("Name: " + rs.getString("name") + ";  Lastname: " + rs.getString("lastname")
 						+ ";  Execution: " + rs.getString("execution"));
 			}
@@ -207,51 +211,52 @@ public class GoTDeadDAO implements GoTDeadInterface {
 
 	public ArrayList<GoTDead> deadFamilies() throws SQLException {
 		ArrayList<GoTDead> deadFamilies = new ArrayList<>();
+		java.util.Scanner input = new java.util.Scanner(System.in);
 		String query = "select name, lastname, role, tod, execution from got.dead where lastname = ?;";
-		try (PreparedStatement statement = connection.prepareStatement(query);
-				java.util.Scanner input = new java.util.Scanner(System.in)) {
+
+		try (PreparedStatement statement = connection.prepareStatement(query);) {
 			System.out.println("Choose a family name: ");
 			System.out.println(
-					"1 - Stark \n2 - Lannister \n3 - Targaryen \n4 - Martell \n5 - Tyrell \6 - Baratheon \n7 - Tully \n8 - Frey");
+					"1 - Stark \n2 - Lannister \n3 - Targaryen \n4 - Martell \n5 - Tyrell \n6 - Baratheon \n7 - Tully \n8 - Frey");
 			int number = input.nextInt();
 			ResultSet rs = null;
 			switch (number) {
-			case 1:{
+			case 1: {
 				statement.setString(1, "Stark");
 				break;
 			}
-			case 2:{
+			case 2: {
 				statement.setString(1, "Lannister");
 				break;
 			}
-			case 3:{
+			case 3: {
 				statement.setString(1, "Targaryen");
 				break;
 			}
-			case 4:{
+			case 4: {
 				statement.setString(1, "Martell");
 				break;
 			}
-			case 5:{
+			case 5: {
 				statement.setString(1, "Tyrell");
 				break;
 			}
-			case 6:{
+			case 6: {
 				statement.setString(1, "Baratheon");
 				break;
 			}
-			case 7:{
+			case 7: {
 				statement.setString(1, "Tully");
 				break;
 			}
-			case 8:{
+			case 8: {
 				statement.setString(1, "Frey");
 				break;
 			}
 			default:
 				break;
 			}
-			
+
 			rs = statement.executeQuery();
 
 			System.out.println("List of dead charachters in that family: ");
@@ -267,9 +272,9 @@ public class GoTDeadDAO implements GoTDeadInterface {
 	public ArrayList<GoTDead> execusionStyleList() throws SQLException {
 
 		ArrayList<GoTDead> executionStyles = new ArrayList<>();
+		java.util.Scanner input = new java.util.Scanner(System.in);
 		String query = "select name, lastname, execution from got.dead where execution = ?;";
-		try (PreparedStatement statement = connection.prepareStatement(query);
-				java.util.Scanner input = new java.util.Scanner(System.in)) {
+		try (PreparedStatement statement = connection.prepareStatement(query);) {
 			System.out.println("Enter execution style you want to check out (exemple: decapitation): ");
 			String style = input.next();
 			ResultSet rs = null;
