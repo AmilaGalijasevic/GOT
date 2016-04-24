@@ -10,18 +10,6 @@ public interface GoTDeadInterface {
 	// return a specific character by name & last name
 	public GoTDead getDeadCharacter() throws SQLException;
 
-//	// returns the season in which the specific character has died
-//	public GoTDead getDeadCharacterBySeason(String inputs) throws SQLException;
-
-//	// returns list of dead people in specific family
-//	public ArrayList<GoTDead> deadFamilies(String family) throws SQLException;
-
-//	// returns list of dead people by the style of execution
-//	public ArrayList<GoTDead> execusionStyleList(String execution) throws SQLException;
-
-//	// returns list of dead people by specific season
-//	public ArrayList<GoTDead> timeOfDeathList(int season) throws SQLException;
-
 	// adds new person to the list
 	public void addToDeadList() throws SQLException;
 
