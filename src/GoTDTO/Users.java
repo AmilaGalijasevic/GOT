@@ -1,6 +1,8 @@
-package got;
+package GoTDTO;
 
 import java.sql.Connection;
+
+import got.ConnManager;
 
 public class Users {
 	int id;

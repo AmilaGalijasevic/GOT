@@ -1,4 +1,4 @@
-package got;
+package GoTDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import GoTDTO.Users;
+import got.ConnManager;
+import got.UsersInterface;
 
 public class UsersDao implements UsersInterface {
 	Connection connection = ConnManager.getInstance().getConnection();

@@ -3,6 +3,8 @@ package got;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import GoTDTO.GoTDead;
+
 public interface GoTDeadInterface {
 	// return all dead characters
 	public ArrayList<GoTDead> deadList() throws SQLException;

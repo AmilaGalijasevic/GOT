@@ -1,4 +1,4 @@
-package got;
+package GoTDTO;
 
 public class GoTDead {
 
